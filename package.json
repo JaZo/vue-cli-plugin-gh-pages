@@ -11,6 +11,7 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
+    "email-addresses": "^3.0.2",
     "gh-pages": "^2.0.0"
   }
 }
