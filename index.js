@@ -51,7 +51,7 @@ module.exports = (api, projectOptions) => {
             add: Boolean(args.a || args.add || pluginOptions.add),
             only: args.v || args.remove || pluginOptions.only || '.',
             remote: args.o || args.remote || pluginOptions.remote || 'origin',
-            push: !Boolean(args.n || args['no-push'] || (pluginOptions.hasOwnProperty('push') ? !pluginOptions.push : false)),
+            push: !Boolean(args.n || (args.hasOwnProperty('push') ? !args.push : false) || (pluginOptions.hasOwnProperty('push') ? !pluginOptions.push : false)),
             depth: args.p || args.depth || pluginOptions.depth || 1,
             user: user || pluginOptions.user,
         };
