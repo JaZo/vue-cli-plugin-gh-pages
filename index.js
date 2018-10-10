@@ -20,7 +20,7 @@ module.exports = (api, projectOptions) => {
             '-n, --no-push':           `Commit only (with no push)`,
             '    --help':              `Output usage information`
         }
-    }, args => {
+    }, async args => {
         const pluginOptions = projectOptions.pluginOptions ? projectOptions.pluginOptions.ghPages || {} : {};
 
         let dir = args.d || args.dist || pluginOptions.dir || projectOptions.outputDir;
@@ -56,8 +56,31 @@ module.exports = (api, projectOptions) => {
             user: user || pluginOptions.user,
         };
 
-        console.log(dir);
-        console.log(api.resolve(dir));
-        console.log(options);
+        await deploy(api, api.resolve(dir), options);
     })
 };
+
+async function deploy(api, dir, options) {
+    const path = require('path');
+    const ghpages = require('gh-pages');
+    const {chalk, log, done, logWithSpinner, stopSpinner} = require('@vue/cli-shared-utils');
+
+    log();
+    const dirShort = path.relative(api.service.context, dir);
+    logWithSpinner(`Deploying ${chalk.cyan(dirShort)} to GitHub Pages...`);
+
+    return new Promise((resolve, reject) => {
+        ghpages.publish(dir, options, err => {
+            stopSpinner(false);
+            if (err) {
+                return reject(err)
+            }
+
+            if (!options.silent) {
+                done(`Deployment complete.`);
+            }
+
+            resolve();
+        });
+    });
+}
