@@ -1,6 +1,6 @@
 module.exports = (api, projectOptions) => {
     api.registerCommand('gh-pages', {
-        description: 'deploy to GitHub pages',
+        description: 'publish to GitHub pages',
         usage: 'vue-cli-service gh-pages [options]',
         options: {
             '-d, --dist <dist>':       `Base directory for all source files (default: ${projectOptions.outputDir})`,
@@ -56,18 +56,18 @@ module.exports = (api, projectOptions) => {
             user: user || pluginOptions.user,
         };
 
-        await deploy(api, api.resolve(dir), options);
+        await publish(api, api.resolve(dir), options);
     })
 };
 
-async function deploy(api, dir, options) {
+async function publish(api, dir, options) {
     const path = require('path');
     const ghpages = require('gh-pages');
     const {chalk, log, done, logWithSpinner, stopSpinner} = require('@vue/cli-shared-utils');
 
     log();
     const dirShort = path.relative(api.service.context, dir);
-    logWithSpinner(`Deploying ${chalk.cyan(dirShort)} to GitHub Pages...`);
+    logWithSpinner(`Publishing ${chalk.cyan(dirShort)} to GitHub Pages...`);
 
     return new Promise((resolve, reject) => {
         ghpages.publish(dir, options, err => {
@@ -77,7 +77,7 @@ async function deploy(api, dir, options) {
             }
 
             if (!options.silent) {
-                done(`Deployment complete.`);
+                done(`Published to GitHub Pages.`);
             }
 
             resolve();
