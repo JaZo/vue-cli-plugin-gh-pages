@@ -4,6 +4,11 @@ All Notable changes to `vue-cli-plugin-gh-pages` will be documented in this file
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [0.2.1] - 2018-10-14
+
+### Changed
+- Updated README
+
 ## [0.2.0] - 2018-10-14
 
 ### Added
