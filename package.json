@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-gh-pages",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "vue-cli 3 plugin to deploy to GitHub pages",
   "author": "Jasper Zonneveld <jasper@zonneveld.me>",
   "repository": {
