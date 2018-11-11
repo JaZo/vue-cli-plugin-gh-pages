@@ -3,7 +3,7 @@
 [![Latest Version on NPM](https://img.shields.io/npm/v/vue-cli-plugin-gh-pages.svg?style=flat-square)](https://npmjs.com/package/vue-cli-plugin-gh-pages)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-vue-cli 3 plugin to publish to GitHub pages (or any other branch anywhere else).
+vue-cli 3 plugin to publish to [GitHub pages](https://pages.github.com/) (or any other branch anywhere else).
 
 ## Install
 
@@ -52,6 +52,8 @@ If you discover any security related issues, please contact Jasper Zonneveld dir
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+This package is not affiliated with nor endorsed by GitHub. GitHub is a registered trademark of GitHub Inc.
 
 ## Credits
 
