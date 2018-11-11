@@ -11,7 +11,7 @@ vue-cli 3 plugin to publish to [GitHub pages](https://pages.github.com/) (or any
 vue add gh-pages
 ```
 
-This module requires Git >=1.9.
+N.B. This plugin requires Git >=1.9.
 
 ## Usage
 
