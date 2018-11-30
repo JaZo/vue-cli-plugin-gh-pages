@@ -19,6 +19,7 @@
   "dependencies": {
     "@vue/cli-shared-utils": "^3.0.0",
     "email-addresses": "^3.0.0",
-    "gh-pages": "^2.0.0"
+    "gh-pages": "^2.0.0",
+    "is-git-url": "^1.0.0"
   }
 }
