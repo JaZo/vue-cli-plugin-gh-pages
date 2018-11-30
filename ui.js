@@ -4,8 +4,10 @@ const getUser = require('gh-pages/lib/util').getUser;
 const isGitUrl = require('is-git-url');
 
 module.exports = api => {
+    const CONFIG = 'com.github.jazo.vue-cli-plugin-gh-pages';
+
     api.describeConfig({
-        id: 'com.github.jazo.vue-cli-plugin-gh-pages',
+        id: CONFIG,
         name: 'GitHub pages publish configuration',
         description: 'Publish to GitHub pages',
         link: 'https://www.npmjs.com/package/vue-cli-plugin-gh-pages',
@@ -190,5 +192,37 @@ module.exports = api => {
         match: /vue-cli-service gh-pages/,
         description: 'Publish to GitHub pages',
         link: 'https://www.npmjs.com/package/vue-cli-plugin-gh-pages'
+    });
+
+    const OPEN_VUE = `${CONFIG}.open-vue`;
+
+    api.onViewOpen(({ view }) => {
+        if (view.id !== 'vue-project-configurations') {
+            api.removeSuggestion(OPEN_VUE)
+        }
+    });
+
+    api.onConfigRead(({ config }) => {
+        if (config.id === CONFIG) {
+            if (config.foundFiles.vue) {
+                api.addSuggestion({
+                    id: OPEN_VUE,
+                    type: 'action',
+                    label: 'Open vue config',
+                    handler () {
+                        const file = config.foundFiles.vue.path;
+                        const { launch } = require('@vue/cli-shared-utils');
+                        launch(file);
+                        return {
+                            keep: true
+                        }
+                    }
+                })
+            } else {
+                api.removeSuggestion(OPEN_VUE)
+            }
+        } else {
+            api.removeSuggestion(OPEN_VUE)
+        }
     });
 };
