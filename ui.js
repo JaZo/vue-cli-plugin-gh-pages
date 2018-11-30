@@ -184,5 +184,11 @@ module.exports = api => {
             }
             api.setData('vue', vueData);
         }
-    })
+    });
+
+    api.describeTask({
+        match: /vue-cli-service gh-pages/,
+        description: 'Publish to GitHub pages',
+        link: 'https://www.npmjs.com/package/vue-cli-plugin-gh-pages'
+    });
 };

@@ -7,7 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [Unreleased]
 
 ### Added
-- Describe config for UI
+- Describe config and task for UI
 
 ## [0.2.1] - 2018-10-14
 
