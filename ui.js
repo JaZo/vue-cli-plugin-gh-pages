@@ -191,7 +191,39 @@ module.exports = api => {
     api.describeTask({
         match: /vue-cli-service gh-pages/,
         description: 'Publish to GitHub pages',
-        link: 'https://www.npmjs.com/package/vue-cli-plugin-gh-pages'
+        link: 'https://www.npmjs.com/package/vue-cli-plugin-gh-pages',
+        prompts: [
+            {
+                name: 'tag',
+                type: 'input',
+                group: 'These options override the options defined in the config',
+                message: 'Tag',
+                description: 'Create a tag after committing changes on the target branch.',
+                link: 'https://www.npmjs.com/package/gh-pages#optionstag'
+            },
+            {
+                name: 'message',
+                type: 'input',
+                group: 'These options override the options defined in the config',
+                message: 'Message',
+                description: 'The commit message.',
+                link: 'https://www.npmjs.com/package/gh-pages#optionsmessage'
+            },
+            {
+                name: 'push',
+                type: 'confirm',
+                group: 'These options override the options defined in the config',
+                default: true,
+                message: 'Push',
+                description: 'Push branch to remote.',
+                link: 'https://www.npmjs.com/package/gh-pages#optionspush'
+            }
+        ],
+        onBeforeRun: ({ answers, args }) => {
+            if (answers.message) args.push('--message', answers.message);
+            if (answers.tag) args.push('--tag', answers.tag);
+            if (!answers.push) args.push('--no-push');
+        },
     });
 
     const OPEN_VUE = `${CONFIG}.open-vue`;
