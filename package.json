@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-gh-pages",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "vue-cli 3 plugin to publish to GitHub pages",
   "keywords": [
     "git",

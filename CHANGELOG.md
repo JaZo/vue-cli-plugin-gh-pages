@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing
+
+## [0.3.0] - 2018-12-05
+
 ### Added
 - Describe config and task for UI
 
