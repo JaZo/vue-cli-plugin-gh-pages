@@ -35,7 +35,7 @@ module.exports = {
 };
 ```
 
-Most options can also be defined on the command line. Please run `vue-cli-service gh-pages --help` to see a list of supported options.
+Most options can also be defined on the command line. Please run `npm run gh-pages -- --help` to see a list of supported options.
 
 ## Changelog
 
