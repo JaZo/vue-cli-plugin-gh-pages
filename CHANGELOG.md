@@ -6,7 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
-- Nothing
+### Changed
+- `message` and `tag` options can be a function
 
 ## [0.3.0] - 2018-12-05
 

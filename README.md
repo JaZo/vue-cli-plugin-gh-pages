@@ -37,6 +37,12 @@ module.exports = {
 
 All options can also be set using the Vue CLI UI. In addition, most options can also be defined on the command line. Please run `npm run gh-pages -- --help` to see a list of supported CLI options.
 
+#### Functions
+
+The `message` and `tag` options can be a function and their return value will be used. This allows you to create, for example, time based commit messages or create a tag based on certain information.
+
+N.B. When these options are defined as a function, they can not be edited using the Vue CLI UI!
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.

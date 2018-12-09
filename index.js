@@ -21,6 +21,7 @@ module.exports = (api, projectOptions) => {
             '    --help':              `Output usage information`
         }
     }, async args => {
+        const isFunction = require('lodash.isfunction');
         const pluginOptions = projectOptions.pluginOptions ? projectOptions.pluginOptions.ghPages || {} : {};
 
         let dir = args.d || args.dist || pluginOptions.dir || projectOptions.outputDir;
@@ -55,6 +56,14 @@ module.exports = (api, projectOptions) => {
             depth: args.p || args.depth || pluginOptions.depth || 1,
             user: user || pluginOptions.user,
         };
+
+        if (isFunction(options.message)) {
+            options.message = await options.message();
+        }
+
+        if (isFunction(options.tag)) {
+            options.tag = await options.tag();
+        }
 
         await publish(api, api.resolve(dir), options);
     })

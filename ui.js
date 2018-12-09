@@ -1,6 +1,7 @@
 const Git = require('gh-pages/lib/git');
 const addr = require('email-addresses');
 const getUser = require('gh-pages/lib/util').getUser;
+const isFunction = require('lodash.isfunction');
 const isGitUrl = require('is-git-url');
 
 module.exports = api => {
@@ -111,7 +112,8 @@ module.exports = api => {
                     {
                         name: 'tag',
                         type: 'input',
-                        value: pluginOptions.tag,
+                        value: !isFunction(pluginOptions.tag) ? pluginOptions.tag : undefined,
+                        when: !isFunction(pluginOptions.tag),
                         message: 'Tag',
                         description: 'Create a tag after committing changes on the target branch.',
                         link: 'https://www.npmjs.com/package/gh-pages#optionstag'
@@ -120,7 +122,8 @@ module.exports = api => {
                         name: 'message',
                         type: 'input',
                         default: 'Updates',
-                        value: pluginOptions.message,
+                        value: !isFunction(pluginOptions.message) ? pluginOptions.message : undefined,
+                        when: !isFunction(pluginOptions.message),
                         message: 'Message',
                         description: 'The commit message for all commits.',
                         link: 'https://www.npmjs.com/package/gh-pages#optionsmessage'
@@ -165,8 +168,17 @@ module.exports = api => {
             }
         },
         onWrite: async ({ prompts, answers, data, files, cwd, api }) => {
+            const pluginOptions = data.vue.pluginOptions ? data.vue.pluginOptions.ghPages || {} : {};
+
             const vueData = {};
             for (const prompt of prompts) {
+                if (
+                    (prompt.id === 'message' && isFunction(pluginOptions.message)) ||
+                    (prompt.id === 'tag' && isFunction(pluginOptions.tag))
+                ) {
+                    continue;
+                }
+
                 let answer = await api.getAnswer(prompt.id);
 
                 if (prompt.id === 'repo' && !answer) {
