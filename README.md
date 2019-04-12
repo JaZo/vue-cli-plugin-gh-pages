@@ -2,6 +2,7 @@
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/vue-cli-plugin-gh-pages.svg?style=flat-square)](https://npmjs.com/package/vue-cli-plugin-gh-pages)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/vue-cli-plugin-gh-pages.svg?style=flat-square)](https://snyk.io/test/github/JaZo/vue-cli-plugin-gh-pages?targetFile=package.json)
 
 vue-cli 3 plugin to publish to [GitHub pages](https://pages.github.com/) (or any other branch anywhere else).
 
