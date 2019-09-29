@@ -163,7 +163,16 @@ module.exports = api => {
                         message: 'Silent',
                         description: 'Avoid showing repository URLs or other information in errors.',
                         link: 'https://www.npmjs.com/package/gh-pages#optionssilent'
-                    }
+                    },
+                    {
+                        name: 'git',
+                        type: 'input',
+                        default: 'git',
+                        value: pluginOptions.git,
+                        message: 'Git',
+                        description: 'Your git executable.',
+                        link: 'https://www.npmjs.com/package/gh-pages#optionsgit'
+                    },
                 ]
             }
         },

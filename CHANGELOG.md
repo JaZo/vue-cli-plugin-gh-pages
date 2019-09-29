@@ -6,7 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
-- Nothing
+### Added
+- Add `git` option
 
 ## [0.4.0] - 2018-12-10
 
