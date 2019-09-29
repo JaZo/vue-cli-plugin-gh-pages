@@ -21,7 +21,7 @@ module.exports = api => {
         onRead: async ({ data, cwd }) => {
             const pluginOptions = data.vue.pluginOptions ? data.vue.pluginOptions.ghPages || {} : {};
 
-            let user = await getUser(cwd);
+            const user = await getUser(cwd);
             let repo;
             try {
                 const git = new Git(cwd);
@@ -93,7 +93,7 @@ module.exports = api => {
                         message: 'Repository',
                         description: 'URL of the repository you\'ll be pushing to (default: url for the origin remote of the project dir).',
                         link: 'https://www.npmjs.com/package/gh-pages#optionsrepo',
-                        validate(input) {
+                        validate (input) {
                             if (!input || isGitUrl(input)) {
                                 return true;
                             }
@@ -137,7 +137,7 @@ module.exports = api => {
                         message: 'User',
                         description: 'The name and email of the user (defaults to the git config). Format is "Your Name &lt;email@example.com&gt;".',
                         link: 'https://www.npmjs.com/package/gh-pages#optionsuser',
-                        validate(input) {
+                        validate (input) {
                             const parts = addr.parseOneAddress(input);
                             if (!input || parts) {
                                 return true;
@@ -173,9 +173,9 @@ module.exports = api => {
                         message: 'Git',
                         description: 'Your git executable.',
                         link: 'https://www.npmjs.com/package/gh-pages#optionsgit'
-                    },
+                    }
                 ]
-            }
+            };
         },
         onWrite: async ({ prompts, answers, data, files, cwd, api }) => {
             const pluginOptions = data.vue.pluginOptions ? data.vue.pluginOptions.ghPages || {} : {};
@@ -198,7 +198,7 @@ module.exports = api => {
                 if (prompt.id === 'user') {
                     if (answer) {
                         const parts = addr.parseOneAddress(answer);
-                        answer = {name: parts.name, email: parts.address};
+                        answer = { name: parts.name, email: parts.address };
                     } else {
                         answer = undefined;
                     }
@@ -245,14 +245,14 @@ module.exports = api => {
             if (answers.message) args.push('--message', answers.message);
             if (answers.tag) args.push('--tag', answers.tag);
             if (!answers.push) args.push('--no-push');
-        },
+        }
     });
 
     const OPEN_VUE = `${CONFIG}.open-vue`;
 
     api.onViewOpen(({ view }) => {
         if (view.id !== 'vue-project-configurations') {
-            api.removeSuggestion(OPEN_VUE)
+            api.removeSuggestion(OPEN_VUE);
         }
     });
 
@@ -269,14 +269,14 @@ module.exports = api => {
                         launch(file);
                         return {
                             keep: true
-                        }
+                        };
                     }
-                })
+                });
             } else {
-                api.removeSuggestion(OPEN_VUE)
+                api.removeSuggestion(OPEN_VUE);
             }
         } else {
-            api.removeSuggestion(OPEN_VUE)
+            api.removeSuggestion(OPEN_VUE);
         }
     });
 };

@@ -5,23 +5,23 @@ module.exports = (api, projectOptions) => {
         description: 'publish to GitHub pages',
         usage: 'vue-cli-service gh-pages [options]',
         options: {
-            '-d, --dist <dist>':       `Base directory for all source files (default: ${projectOptions.outputDir})`,
-            '-s, --src <src>':         `Pattern used to select which files to publish (default: ${ghpages.defaults.src})`,
-            '-b, --branch <branch>':   `Name of the branch you are pushing to (default: ${ghpages.defaults.branch})`,
-            '-e, --dest <dest>':       `Target directory within the destination branch (relative to the root) (default: ${ghpages.defaults.dest})`,
-            '-a, --add':               `Only add, and never remove existing files`,
-            '-x, --silent':            `Do not output the repository url`,
+            '-d, --dist <dist>': `Base directory for all source files (default: ${projectOptions.outputDir})`,
+            '-s, --src <src>': `Pattern used to select which files to publish (default: ${ghpages.defaults.src})`,
+            '-b, --branch <branch>': `Name of the branch you are pushing to (default: ${ghpages.defaults.branch})`,
+            '-e, --dest <dest>': `Target directory within the destination branch (relative to the root) (default: ${ghpages.defaults.dest})`,
+            '-a, --add': 'Only add, and never remove existing files',
+            '-x, --silent': 'Do not output the repository url',
             '-m, --message <message>': `Commit message (default: ${ghpages.defaults.message})`,
-            '-g, --tag <tag>':         `Add tag to commit`,
-            '    --git <git>':         `Path to git executable (default: ${ghpages.defaults.git})`,
-            '-t, --dotfiles':          `Include dotfiles`,
-            '-r, --repo <repo>':       `URL of the repository you are pushing to`,
-            '-p, --depth <depth>':     `Depth for clone (default: ${ghpages.defaults.depth})`,
-            '-o, --remote <name>':     `The name of the remote (default: ${ghpages.defaults.remote})`,
-            '-u, --user <address>':    `The name and email of the user (defaults to the git config). Format is "Your Name <email@example.com>".`,
-            '-v, --remove <pattern>':  `Remove files that match the given pattern (ignored if used together with --add). (default: ${ghpages.defaults.only})`,
-            '-n, --no-push':           `Commit only (with no push)`,
-            '    --help':              `Output usage information`
+            '-g, --tag <tag>': 'Add tag to commit',
+            '    --git <git>': `Path to git executable (default: ${ghpages.defaults.git})`,
+            '-t, --dotfiles': 'Include dotfiles',
+            '-r, --repo <repo>': 'URL of the repository you are pushing to',
+            '-p, --depth <depth>': `Depth for clone (default: ${ghpages.defaults.depth})`,
+            '-o, --remote <name>': `The name of the remote (default: ${ghpages.defaults.remote})`,
+            '-u, --user <address>': 'The name and email of the user (defaults to the git config). Format is "Your Name <email@example.com>".',
+            '-v, --remove <pattern>': `Remove files that match the given pattern (ignored if used together with --add). (default: ${ghpages.defaults.only})`,
+            '-n, --no-push': 'Commit only (with no push)',
+            '    --help': 'Output usage information'
         }
     }, async args => {
         const isFunction = require('lodash.isfunction');
@@ -88,7 +88,7 @@ module.exports = (api, projectOptions) => {
 
         // depth
         if (args.p || args.depth) {
-            options.depth = args.p || args.depth
+            options.depth = args.p || args.depth;
         }
 
         // remote
@@ -107,7 +107,7 @@ module.exports = (api, projectOptions) => {
                     '(format should be "Your Name <email@example.com>")'
                 );
             }
-            options.user = {name: parts.name, email: parts.address};
+            options.user = { name: parts.name, email: parts.address };
         }
 
         // only
@@ -118,17 +118,17 @@ module.exports = (api, projectOptions) => {
         // push
         if (args.n) {
             options.push = false;
-        } else if (args.hasOwnProperty('push')) {
+        } else if (Object.prototype.hasOwnProperty.call(args, 'push')) {
             options.push = args.push;
         }
 
         await publish(api, api.resolve(dir), options);
-    })
+    });
 };
 
-async function publish(api, dir, options) {
+async function publish (api, dir, options) {
     const path = require('path');
-    const {chalk, log, done, logWithSpinner, stopSpinner} = require('@vue/cli-shared-utils');
+    const { chalk, log, done, logWithSpinner, stopSpinner } = require('@vue/cli-shared-utils');
 
     log();
     const dirShort = path.relative(api.service.context, dir);
@@ -138,11 +138,11 @@ async function publish(api, dir, options) {
         ghpages.publish(dir, options, err => {
             stopSpinner(false);
             if (err) {
-                return reject(err)
+                return reject(err);
             }
 
             if (!options.silent) {
-                done(`Published to GitHub Pages.`);
+                done('Published to GitHub Pages.');
             }
 
             resolve();
