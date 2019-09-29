@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing
+
+## [1.0.0] - 2019-09-29
+
 ### Added
 - Add `git` option
 
