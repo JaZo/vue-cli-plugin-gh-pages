@@ -1,23 +1,25 @@
+const ghpages = require('gh-pages');
+
 module.exports = (api, projectOptions) => {
     api.registerCommand('gh-pages', {
         description: 'publish to GitHub pages',
         usage: 'vue-cli-service gh-pages [options]',
         options: {
             '-d, --dist <dist>':       `Base directory for all source files (default: ${projectOptions.outputDir})`,
-            '-s, --src <src>':         `Pattern used to select which files to publish (default: **/*)`,
-            '-b, --branch <branch>':   `Name of the branch you are pushing to (default: gh-pages)`,
-            '-e, --dest <dest>':       `Target directory within the destination branch (relative to the root) (default: .)`,
+            '-s, --src <src>':         `Pattern used to select which files to publish (default: ${ghpages.defaults.src})`,
+            '-b, --branch <branch>':   `Name of the branch you are pushing to (default: ${ghpages.defaults.branch})`,
+            '-e, --dest <dest>':       `Target directory within the destination branch (relative to the root) (default: ${ghpages.defaults.dest})`,
             '-a, --add':               `Only add, and never remove existing files`,
             '-x, --silent':            `Do not output the repository url`,
-            '-m, --message <message>': `Commit message (default: Updates)`,
+            '-m, --message <message>': `Commit message (default: ${ghpages.defaults.message})`,
             '-g, --tag <tag>':         `Add tag to commit`,
-            '    --git <git>':         `Path to git executable (default: git)`,
+            '    --git <git>':         `Path to git executable (default: ${ghpages.defaults.git})`,
             '-t, --dotfiles':          `Include dotfiles`,
             '-r, --repo <repo>':       `URL of the repository you are pushing to`,
-            '-p, --depth <depth>':     `Depth for clone (default: 1)`,
-            '-o, --remote <name>':     `The name of the remote (default: origin)`,
+            '-p, --depth <depth>':     `Depth for clone (default: ${ghpages.defaults.depth})`,
+            '-o, --remote <name>':     `The name of the remote (default: ${ghpages.defaults.remote})`,
             '-u, --user <address>':    `The name and email of the user (defaults to the git config). Format is "Your Name <email@example.com>".`,
-            '-v, --remove <pattern>':  `Remove files that match the given pattern (ignored if used together with --add). (default: .)`,
+            '-v, --remove <pattern>':  `Remove files that match the given pattern (ignored if used together with --add). (default: ${ghpages.defaults.only})`,
             '-n, --no-push':           `Commit only (with no push)`,
             '    --help':              `Output usage information`
         }
@@ -25,9 +27,76 @@ module.exports = (api, projectOptions) => {
         const isFunction = require('lodash.isfunction');
         const pluginOptions = projectOptions.pluginOptions ? projectOptions.pluginOptions.ghPages || {} : {};
 
-        let dir = args.d || args.dist || pluginOptions.dir || projectOptions.outputDir;
+        const dir = args.d || args.dist || pluginOptions.dir || projectOptions.outputDir;
+        const options = { ...pluginOptions };
 
-        let user;
+        // src
+        if (args.s || args.src) {
+            options.src = args.s || args.src;
+        }
+
+        // branch
+        if (args.b || args.branch) {
+            options.branch = args.b || args.branch;
+        }
+
+        // dest
+        if (args.e || args.dest) {
+            options.dest = args.e || args.dest;
+        }
+
+        // add
+        if (args.a || args.add) {
+            options.add = Boolean(args.a || args.add);
+        }
+
+        // silent
+        if (args.x || args.silent) {
+            options.silent = Boolean(args.x || args.silent);
+        }
+
+        // message
+        if (args.m || args.message) {
+            options.message = args.m || args.message;
+        }
+        if (isFunction(options.message)) {
+            options.message = await options.message();
+        }
+
+        // tag
+        if (args.g || args.tag) {
+            options.tag = args.g || args.tag;
+        }
+        if (isFunction(options.tag)) {
+            options.tag = await options.tag();
+        }
+
+        // git
+        if (args.git) {
+            options.git = args.git;
+        }
+
+        // dotfiles
+        if (args.t || args.dotfiles) {
+            options.dotfiles = Boolean(args.t || args.dotfiles);
+        }
+
+        // repo
+        if (args.r || args.repo) {
+            options.repo = args.r || args.repo;
+        }
+
+        // depth
+        if (args.p || args.depth) {
+            options.depth = args.p || args.depth
+        }
+
+        // remote
+        if (args.o || args.remote) {
+            options.remote = args.o || args.remote;
+        }
+
+        // user
         if (args.u || args.user) {
             const addr = require('email-addresses');
 
@@ -38,33 +107,19 @@ module.exports = (api, projectOptions) => {
                     '(format should be "Your Name <email@example.com>")'
                 );
             }
-            user = {name: parts.name, email: parts.address};
+            options.user = {name: parts.name, email: parts.address};
         }
 
-        let options = {
-            repo: args.r || args.repo || pluginOptions.repo,
-            silent: Boolean(args.x || args.silent || pluginOptions.silent),
-            branch: args.b || args.branch || pluginOptions.branch || 'gh-pages',
-            src: args.s || args.src || pluginOptions.src || '**/*',
-            dest: args.e || args.dest || pluginOptions.dest || '.',
-            message: args.m || args.message || pluginOptions.message || 'Updates',
-            tag: args.g || args.tag || pluginOptions.tag,
-            git: args.git || pluginOptions.git || 'git',
-            dotfiles: Boolean(args.t || args.dotfiles || pluginOptions.dotfiles),
-            add: Boolean(args.a || args.add || pluginOptions.add),
-            only: args.v || args.remove || pluginOptions.only || '.',
-            remote: args.o || args.remote || pluginOptions.remote || 'origin',
-            push: !Boolean(args.n || (args.hasOwnProperty('push') ? !args.push : false) || (pluginOptions.hasOwnProperty('push') ? !pluginOptions.push : false)),
-            depth: args.p || args.depth || pluginOptions.depth || 1,
-            user: user || pluginOptions.user,
-        };
-
-        if (isFunction(options.message)) {
-            options.message = await options.message();
+        // only
+        if (args.v || args.remove) {
+            options.only = args.v || args.remove;
         }
 
-        if (isFunction(options.tag)) {
-            options.tag = await options.tag();
+        // push
+        if (args.n) {
+            options.push = false;
+        } else if (args.hasOwnProperty('push')) {
+            options.push = args.push;
         }
 
         await publish(api, api.resolve(dir), options);
@@ -73,7 +128,6 @@ module.exports = (api, projectOptions) => {
 
 async function publish(api, dir, options) {
     const path = require('path');
-    const ghpages = require('gh-pages');
     const {chalk, log, done, logWithSpinner, stopSpinner} = require('@vue/cli-shared-utils');
 
     log();

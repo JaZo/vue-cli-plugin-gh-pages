@@ -1,3 +1,4 @@
+const ghpages = require('gh-pages');
 const Git = require('gh-pages/lib/git');
 const addr = require('email-addresses');
 const getUser = require('gh-pages/lib/util').getUser;
@@ -42,7 +43,7 @@ module.exports = api => {
                     {
                         name: 'src',
                         type: 'input',
-                        default: '**/*',
+                        default: ghpages.defaults.src,
                         value: pluginOptions.src,
                         message: 'Source',
                         description: 'The minimatch pattern used to select which files should be published.',
@@ -51,7 +52,7 @@ module.exports = api => {
                     {
                         name: 'branch',
                         type: 'input',
-                        default: 'gh-pages',
+                        default: ghpages.defaults.branch,
                         value: pluginOptions.branch,
                         message: 'Branch',
                         description: 'The name of the branch you\'ll be pushing to.',
@@ -60,7 +61,7 @@ module.exports = api => {
                     {
                         name: 'dest',
                         type: 'input',
-                        default: '.',
+                        default: ghpages.defaults.dest,
                         value: pluginOptions.dest,
                         message: 'Destination',
                         description: 'The destination folder (relative to the root) within the destination branch.',
@@ -69,7 +70,7 @@ module.exports = api => {
                     {
                         name: 'dotfiles',
                         type: 'confirm',
-                        default: false,
+                        default: ghpages.defaults.dotfiles,
                         value: pluginOptions.dotfiles,
                         message: 'Dotfiles',
                         description: 'Include dotfiles.',
@@ -78,7 +79,7 @@ module.exports = api => {
                     {
                         name: 'add',
                         type: 'confirm',
-                        default: false,
+                        default: ghpages.defaults.add,
                         value: pluginOptions.add,
                         message: 'Add',
                         description: 'Only add, and never remove existing files.',
@@ -103,7 +104,7 @@ module.exports = api => {
                     {
                         name: 'remote',
                         type: 'input',
-                        default: 'origin',
+                        default: ghpages.defaults.remote,
                         value: pluginOptions.remote,
                         message: 'Remote',
                         description: 'The name of the remote you\'ll be pushing to.',
@@ -121,7 +122,7 @@ module.exports = api => {
                     {
                         name: 'message',
                         type: 'input',
-                        default: 'Updates',
+                        default: ghpages.defaults.message,
                         value: !isFunction(pluginOptions.message) ? pluginOptions.message : undefined,
                         when: !isFunction(pluginOptions.message),
                         message: 'Message',
@@ -149,7 +150,7 @@ module.exports = api => {
                     {
                         name: 'push',
                         type: 'confirm',
-                        default: true,
+                        default: ghpages.defaults.push,
                         value: pluginOptions.push,
                         message: 'Push',
                         description: 'Push branch to remote.',
@@ -158,7 +159,7 @@ module.exports = api => {
                     {
                         name: 'silent',
                         type: 'confirm',
-                        default: false,
+                        default: ghpages.defaults.silent,
                         value: pluginOptions.silent,
                         message: 'Silent',
                         description: 'Avoid showing repository URLs or other information in errors.',
@@ -167,7 +168,7 @@ module.exports = api => {
                     {
                         name: 'git',
                         type: 'input',
-                        default: 'git',
+                        default: ghpages.defaults.git,
                         value: pluginOptions.git,
                         message: 'Git',
                         description: 'Your git executable.',
@@ -234,7 +235,7 @@ module.exports = api => {
                 name: 'push',
                 type: 'confirm',
                 group: 'These options override the options defined in the config',
-                default: true,
+                default: ghpages.defaults.push,
                 message: 'Push',
                 description: 'Push branch to remote.',
                 link: 'https://www.npmjs.com/package/gh-pages#optionspush'
