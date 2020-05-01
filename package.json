@@ -21,7 +21,8 @@
     "email-addresses": "^3.0.0",
     "gh-pages": "^2.1.0",
     "is-git-url": "^1.0.0",
-    "lodash.isfunction": "^3.0.0"
+    "lodash.isfunction": "^3.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "eslint": "^6.5.0",
@@ -32,9 +33,12 @@
     "eslint-plugin-standard": "^4.0.1"
   },
   "scripts": {
-    "lint": "eslint generator.js index.js ui.js"
+    "lint": "eslint generator.js index.js ui.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "engines": {
     "node": ">=8.3.0"
-  }
+  },
+  "snyk": true
 }
