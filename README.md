@@ -4,7 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/vue-cli-plugin-gh-pages.svg?style=flat-square)](https://snyk.io/test/github/JaZo/vue-cli-plugin-gh-pages?targetFile=package.json)
 
-vue-cli 3 plugin to publish to [GitHub pages](https://pages.github.com/) (or any other branch anywhere else).
+Vue CLI plugin to publish to [GitHub pages](https://pages.github.com/) (or any other branch anywhere else).
 
 ## Install
 
@@ -67,4 +67,4 @@ This package is not affiliated with nor endorsed by GitHub. GitHub is a register
 - [Jasper Zonneveld](https://github.com/JaZo)
 - [All Contributors](../../contributors)
 
-This package is a vue-cli 3 plugin wrapping [gh-pages](https://github.com/tschaub/gh-pages). Many thanks to [Tim Schaub](https://github.com/tschaub) for his excellent package!
+This package is a Vue CLI plugin wrapping [gh-pages](https://github.com/tschaub/gh-pages). Many thanks to [Tim Schaub](https://github.com/tschaub) for his excellent package!
