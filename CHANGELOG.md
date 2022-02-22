@@ -7,7 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [Unreleased]
 
 ### Changed
-- Bump gh-pages and email-addresses dependencies
+- Bump @vue/cli-shared-utils, gh-pages and email-addresses dependencies
 
 ## [1.0.0] - 2019-09-29
 

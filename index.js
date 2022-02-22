@@ -128,21 +128,21 @@ module.exports = (api, projectOptions) => {
 
 async function publish (api, dir, options) {
     const path = require('path');
-    const { chalk, log, done, logWithSpinner, stopSpinner } = require('@vue/cli-shared-utils');
+    const { chalk, logger, spinner } = require('@vue/cli-shared-utils');
 
-    log();
+    logger.log();
     const dirShort = path.relative(api.service.context, dir);
-    logWithSpinner(`Publishing ${chalk.cyan(dirShort)} to GitHub Pages...`);
+    spinner.logWithSpinner(`Publishing ${chalk.cyan(dirShort)} to GitHub Pages...`);
 
     return new Promise((resolve, reject) => {
         ghpages.publish(dir, options, err => {
-            stopSpinner(false);
+            spinner.stopSpinner(false);
             if (err) {
                 return reject(err);
             }
 
             if (!options.silent) {
-                done('Published to GitHub Pages.');
+                logger.done('Published to GitHub Pages.');
             }
 
             resolve();
