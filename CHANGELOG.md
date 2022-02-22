@@ -5,6 +5,9 @@ All Notable changes to `vue-cli-plugin-gh-pages` will be documented in this file
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## [Unreleased]
+- Nothing
+
+## [2.0.0] - 2022-02-22
 
 ### Changed
 - Bump [gh-pages](https://www.npmjs.com/package/gh-pages) (v2 to v3) and [email-addresses](https://www.npmjs.com/package/email-addresses) (v3 to v4) dependencies
