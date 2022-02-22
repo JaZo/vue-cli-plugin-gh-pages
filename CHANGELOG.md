@@ -7,7 +7,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [Unreleased]
 
 ### Changed
-- Bump @vue/cli-shared-utils, gh-pages and email-addresses dependencies
+- Bump [gh-pages](https://www.npmjs.com/package/gh-pages) (v2 to v3) and [email-addresses](https://www.npmjs.com/package/email-addresses) (v3 to v4) dependencies
+- Bump [@vue/cli-shared-utils](https://www.npmjs.com/package/@vue/cli-shared-utils) (v3 to v5) internal dependency
 
 ### Removed
 - Drop support of Node.js 8-11 and 13
