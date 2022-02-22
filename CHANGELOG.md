@@ -9,6 +9,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Changed
 - Bump @vue/cli-shared-utils, gh-pages and email-addresses dependencies
 
+### Removed
+- Drop support of Node.js 8-11 and 13
+
 ## [1.0.0] - 2019-09-29
 
 ### Added
