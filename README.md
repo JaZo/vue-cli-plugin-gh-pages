@@ -6,6 +6,10 @@
 
 Vue CLI plugin to publish to [GitHub pages](https://pages.github.com/) (or any other branch anywhere else).
 
+⚠️ Vue CLI and this plugin are in Maintenance Mode! ⚠️
+
+For new projects, it is now recommended to use [`create-vue`](https://github.com/vuejs/create-vue) to scaffold [Vite](https://vitejs.dev/)-based projects. Also refer to the [Vue 3 Tooling Guide](https://vuejs.org/guide/scaling-up/tooling.html) for the latest recommendations. You can use the [gh-pages CLI](https://www.npmjs.com/package/gh-pages#command-line-utility) as a replacement for this plugin.
+
 ## Install
 
 ```bash
